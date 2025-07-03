@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔒 Virtual Numbers Pro</title>
+  
+  <!-- WhatsApp Link Preview Meta Tags -->
+  <meta property="og:title" content="Secure Virtual Numbers Pro">
+  <meta property="og:description" content="Get temporary virtual numbers for WhatsApp, Telegram, TikTok and more!">
+  <meta property="og:image" content="https://i.ibb.co/7nG5JfS/virtual-numbers-preview.png">
+  <meta property="og:url" content="https://virtualnumberspro.example.com">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Secure Virtual Numbers Pro">
+  <meta name="twitter:description" content="Get temporary virtual numbers for WhatsApp, Telegram, TikTok and more!">
+  <meta name="twitter:image" content="https://i.ibb.co/7nG5JfS/virtual-numbers-preview.png">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    
+    :root {
+      --primary: #1db954;
+      --primary-dark: #1aa34a;
+      --dark-bg: #0d1525;
+      --darker-bg: #090f1c;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-hover: rgba(29, 185, 84, 0.1);
+      --border: rgba(255, 255, 255, 0.1);
+      --text-light: #fff;
+      --text-muted: #a0aec0;
+      --error: #ff4444;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    body {
+      background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
+      color: var(--text-light);
+      min-height: 100vh;
+      padding-top: 120px;
+      overflow-x: hidden;
+    }
+    
+    /* Header with scrollable nav */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(13, 21, 37, 0.98);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo-icon {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(29, 185, 84, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(29, 185, 84, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(29, 185, 84, 0); }
+    }
+    
+    .logo h1 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      background: linear-gradient(90deg, var(--primary), #4cffa3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .header-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .header-btn:hover {
+      background: rgba(29, 185, 84, 0.1);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    /* Scrollable navigation */
+    .nav-container {
+      position: relative;
+      overflow-x: auto;
+      padding: 0 15px 10px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .nav-container::-webkit-scrollbar {
+      display: none;
+    }
+    
+    nav {
+      display: flex;
+      gap: 8px;
+      padding: 0 5px;
+      width: max-content;
+    }
+    
+    nav button {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    
+    nav button i {
+      font-size: 1rem;
+    }
+    
+    nav button.active, nav button:hover {
+      background: rgba(29, 185, 84, 0.1);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    /* Search and filter */
+    .filters {
+      display: flex;
+      gap: 15px;
+      padding: 15px 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .search-bar {
+      flex: 1;
+      position: relative;
+    }
+    
+    .search-bar input {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text-light);
+      border-radius: 20px;
+      padding: 10px 15px 10px 40px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .search-bar input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.2);
+    }
+    
+    .search-bar i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+    
+    .filter-container {
+      min-width: 150px;
+    }
+    
+    .filter-container select {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text-light);
+      padding: 10px 15px;
+      border-radius: 20px;
+      width: 100%;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0aec0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+    }
+    
+    /* Main content */
+    main {
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    #numbers {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.5s forwards;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    
+    .card-header {
+      align-self: flex-end;
+      display: flex;
+      gap: 8px;
+    }
+    
+    .availability {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .available {
+      background: #28a745;
+      box-shadow: 0 0 8px #28a745;
+      animation: pulseDot 1.5s infinite;
+    }
+    
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(40, 167, 69, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+    }
+    
+    .unavailable {
+      background: #dc3545;
+    }
+    
+    .flag-code {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.8rem;
+      margin: 5px 0;
+    }
+    
+    .phone-number {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-family: monospace;
+    }
+    
+    .encrypted {
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px dashed var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .encrypted:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(29, 185, 84, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    footer {
+      text-align: center;
+      padding: 25px 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 30px;
+    }
+    
+    /* Modal styles */
+    .modal-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    
+    .modal-bg.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal {
+      background: rgba(18, 26, 45, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    
+    .modal-bg.active .modal {
+      transform: translateY(0);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .close-btn:hover {
+      color: var(--primary);
+    }
+    
+    .modal h3 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .modal p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .modal-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .modal-btn {
+      padding: 12px 25px;
+      border-radius: 30px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .yt-btn {
+      background: #ff0000;
+      color: white;
+    }
+    
+    .tg-btn {
+      background: #0088cc;
+      color: white;
+    }
+    
+    /* VPN Error Modal */
+    .vpn-error {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .vpn-icon {
+      font-size: 3.5rem;
+      color: var(--error);
+      margin-bottom: 15px;
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+    
+    .vpn-error h4 {
+      color: var(--error);
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+    
+    .vpn-error p {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .filters {
+        flex-direction: column;
+      }
+      
+      .top-bar {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .header-actions {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      body {
+        padding-top: 180px;
+      }
+      
+      .stats {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .modal-buttons {
+        flex-direction: column;
+      }
+      
+      .modal-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      #numbers {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Preview image styling */
+    .preview-container {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with scrollable navigation -->
+  <header>
+    <div class="top-bar">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h1>Secure Virtual Numbers Pro</h1>
+      </div>
+      <div class="header-actions">
+        <button class="header-btn" onclick="openModal('faqModal')">
+          <i class="fas fa-question-circle"></i> FAQ
+        </button>
+      </div>
+    </div>
+    
+    <div class="filters">
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search numbers...">
+      </div>
+      <div class="filter-container">
+        <select id="countryFilter">
+          <option value="all">All Countries</option>
+          <option value="+1">🇺🇸 USA</option>
+          <option value="+44">🇬🇧 UK</option>
+          <option value="+81">🇯🇵 Japan</option>
+          <option value="+61">🇦🇺 Australia</option>
+          <option value="+91">🇮🇳 India</option>
+          <option value="+33">🇫🇷 France</option>
+          <option value="+49">🇩🇪 Germany</option>
+          <option value="+82">🇰🇷 S. Korea</option>
+          <option value="+55">🇧🇷 Brazil</option>
+          <option value="+263">🇿🇼 Zimbabwe</option>
+          <option value="+27">🇿🇦 South Africa</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="nav-container">
+      <nav id="catNav">
+        <button class="active" data-cat="all"><i class="fas fa-globe"></i> All</button>
+        <button data-cat="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+        <button data-cat="Telegram"><i class="fab fa-telegram"></i> Telegram</button>
+        <button data-cat="Facebook"><i class="fab fa-facebook"></i> Facebook</button>
+        <button data-cat="TikTok"><i class="fab fa-tiktok"></i> TikTok</button>
+        <button data-cat="Twitter"><i class="fab fa-twitter"></i> Twitter</button>
+        <button data-cat="PayPal"><i class="fab fa-paypal"></i> PayPal</button>
+        <button data-cat="Other"><i class="fas fa-key"></i> Other</button>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <!-- Stats section -->
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-value">512</div>
+        <div class="stat-label">Virtual Numbers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">7</div>
+        <div class="stat-label">Categories</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">11</div>
+        <div class="stat-label">Countries</div>
+      </div>
+    </div>
+    
+    <!-- Numbers grid -->
+    <div id="numbers"></div>
+    <div id="toast"></div>
+  </main>
+  
+  <footer>
+    Numbers are encrypted. Subscribe to unlock. VPN required for access.
+  </footer>
+  
+  <!-- Unlock Modal -->
+  <div class="modal-bg" id="unlockModal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeModal('unlockModal')">×</button>
+      <h3><i class="fas fa-lock-open"></i> Unlock Number</h3>
+      <p>To prevent abuse, you must be a subscriber to unlock numbers.</p>
+      <p>Please subscribe to our YouTube and join our Telegram, then try again.</p>
+      
+      <div class="modal-buttons">
+        <button class="modal-btn yt-btn" onclick="handleSubscriptionClick('https://www.youtube.com/@CalyxDrey')">
+          <i class="fab fa-youtube"></i> YouTube
+        </button>
+        <button class="modal-btn tg-btn" onclick="handleSubscriptionClick('https://t.me/haxk_em')">
+          <i class="fab fa-telegram"></i> Telegram
+        </button>
+      </div>
+      
+      <p style="margin-top:20px; font-size:0.9rem; color:var(--text-muted); text-align:center;">
+        After subscribing, close this pop-up and click the number again.
+      </p>
+    </div>
+  </div>
+  
+  <!-- VPN Required Modal -->
+  <div class="modal-bg" id="vpnModal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeModal('vpnModal')">×</button>
+      <div class="vpn-error">
+        <div class="vpn-icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h4>VPN Required</h4>
+        <p>You must use a VPN to access this virtual number.</p>
+        <p>Our service detects that you are in a restricted region. Please activate your VPN and try again to access the number.</p>
+        <p style="margin-top: 15px; color: var(--text-light);">
+          <i class="fas fa-lightbulb"></i> Tip: Connect to a server in the number's country for best results
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- FAQ Modal -->
+  <div class="modal-bg" id="faqModal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeModal('faqModal')">×</button>
+      <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+      
+      <div style="margin-top: 20px;">
+        <div style="margin-bottom: 20px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Why do I need a VPN?</h4>
+          <p style="color: var(--text-muted);">Virtual numbers are region-restricted. A VPN masks your location, allowing you to access numbers from different countries. This is required for our service to work properly.</p>
+        </div>
+        
+        <div style="margin-bottom: 20px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">How do I unlock a number?</h4>
+          <p style="color: var(--text-muted);">Subscribe to our YouTube channel and join our Telegram group. After that, click the encrypted number again to unlock it.</p>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">What does availability mean?</h4>
+          <p style="color: var(--text-muted);">Green dots indicate numbers currently available for registration. Red dots mean recently used numbers that may be temporarily unavailable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview Container (Hidden) -->
+  <div class="preview-container">
+    <div class="preview-image">
+      <!-- This container is for generating the preview image only -->
+    </div>
+  </div>
+
+  <script>
+    // Country data with flag and code
+    const countries = [
+      { flag: "🇿🇼", code: "+263", name: "Zimbabwe" },
+      { flag: "🇿🇦", code: "+27", name: "South Africa" },
+      { flag: "🇺🇸", code: "+1", name: "USA" },
+      { flag: "🇬🇧", code: "+44", name: "UK" },
+      { flag: "🇯🇵", code: "+81", name: "Japan" },
+      { flag: "🇦🇺", code: "+61", name: "Australia" },
+      { flag: "🇮🇳", code: "+91", name: "India" },
+      { flag: "🇫🇷", code: "+33", name: "France" },
+      { flag: "🇩🇪", code: "+49", name: "Germany" },
+      { flag: "🇰🇷", code: "+82", name: "S. Korea" },
+      { flag: "🇧🇷", code: "+55", name: "Brazil" }
+    ];
+    
+    const categories = ['WhatsApp', 'Telegram', 'Facebook', 'TikTok', 'Twitter', 'PayPal', 'Other'];
+    
+    // Generate phone number
+    function generatePhoneNumber() {
+      const digits = Math.floor(1000000000 + Math.random() * 9000000000).toString();
+      return `${digits.substring(0, 3)} ${digits.substring(3, 6)} ${digits.substring(6, 10)}`;
+    }
+    
+    // Initialize app
+    document.addEventListener('DOMContentLoaded', () => {
+      generateNumbers();
+      setupEventListeners();
+    });
+    
+    // Generate 512 virtual numbers
+    function generateNumbers() {
+      const numbersContainer = document.getElementById('numbers');
+      numbersContainer.innerHTML = '';
+      
+      // Generate 512 numbers (64 per category)
+      for (let i = 0; i < 512; i++) {
+        const country = countries[Math.floor(Math.random() * countries.length)];
+        const category = categories[Math.floor(Math.random() * categories.length)];
+        const available = Math.random() > 0.3;
+        
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.animationDelay = `${i * 0.02}s`;
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="availability ${available ? 'available' : 'unavailable'}"></div>
+          </div>
+          <div class="flag-code">
+            <span>${country.flag}</span>
+            <span class="phone-number">${country.code}</span>
+          </div>
+          <div class="encrypted" onclick="handleNumberClick()">
+            <i class="fas fa-lock"></i> Number Encrypted
+          </div>
+        `;
+        
+        numbersContainer.appendChild(card);
+      }
+    }
+    
+    // Setup event listeners
+    function setupEventListeners() {
+      // Category navigation
+      const navButtons = document.querySelectorAll('#catNav button');
+      navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          navButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          // Show toast when changing category
+          showToast(`Showing ${button.textContent} numbers`);
+        });
+      });
+      
+      // Search functionality
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+          const countryCode = card.querySelector('.phone-number').textContent.toLowerCase();
+          if (countryCode.includes(searchTerm)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+      
+      // Country filter
+      const countryFilter = document.getElementById('countryFilter');
+      countryFilter.addEventListener('change', () => {
+        const selectedCountry = countryFilter.value;
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+          const countryCode = card.querySelector('.phone-number').textContent;
+          if (selectedCountry === 'all' || countryCode === selectedCountry) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+    
+    // Handle number click
+    function handleNumberClick() {
+      // First show unlock modal
+      openModal('unlockModal');
+    }
+    
+    // Modal functions
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+    }
+    
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+    }
+    
+    // Handle subscription button clicks
+    function handleSubscriptionClick(url) {
+      // Show toast notification
+      showToast('Redirecting to subscription...');
+      
+      // Open URL in new tab
+      window.open(url, '_blank');
+      
+      // Close the unlock modal
+      closeModal('unlockModal');
+      
+      // After a delay, show VPN requirement
+      setTimeout(() => {
+        openModal('vpnModal');
+      }, 2000);
+    }
+    
+    // Toast notification
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast');
+      toast.innerHTML = `<i class="fas fa-${isError ? 'exclamation-triangle' : 'check-circle'}"></i> ${message}`;
+      toast.className = 'toast';
+      if (isError) toast.classList.add('error');
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Close modals when clicking outside
+    document.querySelectorAll('.modal-bg').forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
